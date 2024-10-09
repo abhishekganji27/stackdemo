@@ -1,0 +1,8 @@
+  services:
+    web:
+      image: 127.0.0.1:5001/stackdemo
+      build: .
+      ports:
+        - "8000:8000"
+    redis:
+      image: redis:alpine
