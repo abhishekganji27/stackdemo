@@ -1,8 +1,29 @@
-  services:
-    web:
-      image: 127.0.0.1:5001/stackdemo
-      build: .
-      ports:
-        - "8000:8000"
-    redis:
-      image: redis:alpine
+services:
+  web:
+    image: 127.0.0.1:5009/stackdemo
+    build: .
+    ports:
+      - "8000:8000"
+    networks:
+      - c_net
+
+  redis:
+    image: redis:alpine
+    networks:
+      - c_net
+
+  alpine:
+    image: alpine:latest
+    tty: true
+    networks:
+      - c_net
+  nginx:
+    image: nginx:latest
+    networks:
+      - c_net
+
+networks:
+  c_net:
+    name: c_net
+    driver: overlay
+    attachable: true
