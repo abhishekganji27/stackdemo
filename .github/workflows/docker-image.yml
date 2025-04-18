@@ -8,11 +8,16 @@ on:
 
 jobs:
 
-  build:
+  deploy:
 
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag abhishekganji27/stackdemo:$(date +%s)
+      run: docker build . --file Dockerfile --tag abhishekganji27/stackdemo:${{ github.run_number }}
+    
+    - name: Push the Docker image
+      run: docker push abhishekganji27/stackdemo:${{ github.run_number }}
