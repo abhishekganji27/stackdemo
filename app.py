@@ -1,13 +1,14 @@
 from flask import Flask
-from redis import Redis
+# from redis import Redis
 
 app = Flask(__name__)
-redis = Redis(host='redis', port=6379)
+# redis = Redis(host='redis', port=6379)
 
 @app.route('/')
 def hello():
-    count = redis.incr('hits')
-    return 'Hello World! I have been seen {} times.\n'.format(count)
+    # count = redis.incr('hits')
+    return 'Hello World!...home route' 
+    # I have been seen {} times.\n'.format(count)
 
 @app.route('/sample')
 def sample():
