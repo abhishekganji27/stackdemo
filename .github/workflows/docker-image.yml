@@ -39,14 +39,16 @@ jobs:
         path: k8s-manifests
 
     - name: files
-      run: ls
+      run: |
+        ls
+        pwd
         
     - name: checkout to main and list
       run: |
-        git checkout main
+        cd main
         ls
         
     - name: checkout to k8s-manifest branch and list
       run: |
-        git checkout k8s-manifests
+        cd ../k8s-manifests
         ls
