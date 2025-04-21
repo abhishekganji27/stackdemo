@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    # - name: Checkout code
+    #   uses: actions/checkout@v4
     
     # - name: Build the Docker image
     #   run: docker build . --file Dockerfile --tag abhishekganji27/stackdemo:${{ github.run_number }}
@@ -27,7 +27,25 @@ jobs:
 
     # - name: Push the Docker image
     #   run: docker push abhishekganji27/stackdemo:${{ github.run_number }}
-    - name: Github Workspace
-      run: "echo github workspace: ${{ github.workspace }}"
-    - name: Files 
-      run: ls 
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        path: main
+    
+    - name: Current branch
+      run: "Current branch: ${{ github.ref_name }} 
+
+    - name: files
+      run: ls
+      
+    - name: Checkout tools repo
+      uses: actions/checkout@v4
+      with:
+        repository: abhishekganji27/k8s-argocd
+        path: k8s-manifests
+    
+    - name: Current branch
+      run: "Current branch: ${{ github.ref_name }} 
+
+    - name: files
+      run: ls
