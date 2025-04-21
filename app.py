@@ -15,8 +15,8 @@ def sample():
     return 'this is the sample route'
     
 @app.route('/new')
-def sample():
-    return 'this is the new route, in stackdemo:v8'
+def new_r():
+    return 'this is the new route, in stackdemo:v21'
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
