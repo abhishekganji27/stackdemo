@@ -47,8 +47,9 @@ jobs:
       run: |
         cd main
         ls
+        pwd
         
-    - name: checkout to k8s-manifest branch and list
-      run: |
-        cd ../k8s-manifests
-        ls
+    # - name: checkout to k8s-manifest branch and list
+    #   run: |
+    #     cd /k8s-manifests
+    #     ls
