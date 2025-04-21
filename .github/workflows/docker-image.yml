@@ -55,5 +55,5 @@ jobs:
     - name: checkout to k8s-manifest branch and list
       run: |
         pwd
-        cd k8s-manifests
+        cd k8s-manifests/stackdemo
         ls
