@@ -27,25 +27,26 @@ jobs:
 
     # - name: Push the Docker image
     #   run: docker push abhishekganji27/stackdemo:${{ github.run_number }}
-    - name: Checkout
+    - name: Checkout main branch
       uses: actions/checkout@v4
       with:
         path: main
-    
-    - name: Current branch
-      run: "echo Current branch: ${{ github.ref_name }}" 
-
-    - name: files
-      run: ls
       
-    - name: Checkout tools repo
+    - name: Checkout k8s-argocd repo
       uses: actions/checkout@v4
       with:
         repository: abhishekganji27/k8s-argocd
         path: k8s-manifests
-    
-    - name: Current branch
-      run: "echo Current branch: ${{ github.ref_name }}" 
 
     - name: files
       run: ls
+        
+    - name: checkout to main and list
+      run: |
+        git checkout main
+        ls
+        
+    - name: checkout to k8s-manifest branch and list
+      run: |
+        git checkout k8s-manifests
+        ls
