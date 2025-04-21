@@ -33,7 +33,7 @@ jobs:
         path: main
     
     - name: Current branch
-      run: "Current branch: ${{ github.ref_name }} 
+      run: "Current branch: ${{ github.ref_name }}" 
 
     - name: files
       run: ls
@@ -45,7 +45,7 @@ jobs:
         path: k8s-manifests
     
     - name: Current branch
-      run: "Current branch: ${{ github.ref_name }} 
+      run: "Current branch: ${{ github.ref_name }}" 
 
     - name: files
       run: ls
