@@ -29,33 +29,21 @@ jobs:
     - name: Push the Docker image
       run: docker push $IMAGE_NAME
       
-    # - name: Checkout main branch
-    #   uses: actions/checkout@v4
-    #   with:
-    #     path: main
-      
-    # - name: Checkout k8s-argocd repo
-    #   uses: actions/checkout@v4
-    #   with:
-    #     repository: abhishekganji27/k8s-argocd
-    #     path: k8s-manifests
+    - name: Checkout k8s-argocd repo
+      uses: actions/checkout@v4
+      with:
+        repository: abhishekganji27/k8s-argocd
+        path: k8s-manifests
+        
+    - name: modify kustomization.yaml in k8s-manifests/stackdemo dir
+      run: |
+        cd k8s-manifests/stackdemo
+        
+        yq e ".newTag: \"${{ github.run_number }}\"" -i kustomization.yaml
 
-    # - name: files
-    #   run: |
-    #     ls
-    #     pwd
+        cat kustomization.yaml
+
+        git --version
+
+        git remote -v 
         
-    # - name: checkout to main and list
-    #   run: |
-    #     cd main
-    #     ls
-    #     pwd
-    #     cd ..
-    #     pwd
-        
-        
-    # - name: checkout to k8s-manifest branch and list
-    #   run: |
-    #     pwd
-    #     cd k8s-manifests/stackdemo
-    #     ls
