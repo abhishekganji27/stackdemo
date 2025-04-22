@@ -47,7 +47,7 @@ jobs:
       uses: mikefarah/yq@master
       with:
         cmd: "yq -i '.images[0].newTag: \"${{ github.run_number }}\"' k8s-manifests/stackdemo/kustomization.yaml"
-        
+
     - name: cat kustomization.yaml in k8s-manifests/stackdemo dir
       run: |
         # cd k8s-manifests/stackdemo
@@ -55,6 +55,10 @@ jobs:
         # ls
         echo "cat k11n.yaml"
         cat k8s-manifests/stackdemo/kustomization.yaml
+
+        git add .
+        git commit -m "modified kustomization manifest"
+        git push 
           
     # - name: modify kustomization.yaml in k8s-manifests/stackdemo dir
     #   run: |
