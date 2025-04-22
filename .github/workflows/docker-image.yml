@@ -43,7 +43,7 @@ jobs:
         echo "cat kusto.yaml"
         cat kustomization.yaml
 
-        yq e ".newTag: \"${{ github.run_number }}\"" -i kustomization.yaml
+        yq -iy ".images[0].newTag: \"${{ github.run_number }}\"" kustomization.yaml
 
         echo "cat kusto.yaml"
         cat kustomization.yaml
