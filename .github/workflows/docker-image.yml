@@ -35,19 +35,27 @@ jobs:
         repository: abhishekganji27/k8s-argocd
         path: k8s-manifests
     
-    - name: modify kustomization.yaml in k8s-manifests/stackdemo dir
+    - name: cat kustomization.yaml in k8s-manifests/stackdemo dir
       run: |
-        cd k8s-manifests/stackdemo
-        echo "file system contents"
-        ls
+        # cd k8s-manifests/stackdemo
+        # echo "file system contents"
+        # ls
         echo "cat k11n.yaml"
-        cat kustomization.yaml
-
+        cat k8s-manifests/stackdemo/kustomization.yaml
+        
     - name: update image tag in k11n.yaml
       uses: mikefarah/yq@master
       with:
-        cmd: "yq -i '.images[0].newTag: \"${{ github.run_number }}\"' 'kustomization.yaml'"
-
+        cmd: "yq -i '.images[0].newTag: \"${{ github.run_number }}\"' k8s-manifests/stackdemo/kustomization.yaml"
+        
+    - name: cat kustomization.yaml in k8s-manifests/stackdemo dir
+      run: |
+        # cd k8s-manifests/stackdemo
+        # echo "file system contents"
+        # ls
+        echo "cat k11n.yaml"
+        cat k8s-manifests/stackdemo/kustomization.yaml
+          
     # - name: modify kustomization.yaml in k8s-manifests/stackdemo dir
     #   run: |
     #     cd k8s-manifests/stackdemo
