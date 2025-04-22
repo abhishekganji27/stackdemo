@@ -55,7 +55,13 @@ jobs:
         # ls
         echo "cat k11n.yaml"
         cat k8s-manifests/stackdemo/kustomization.yaml
+        
+        cd k8s-manifests/stackdemo
 
+        git --version
+
+        git remote -v 
+        
         git add .
         git commit -m "modified kustomization manifest"
         git push 
