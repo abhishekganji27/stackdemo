@@ -40,6 +40,8 @@ jobs:
         cd k8s-manifests/stackdemo
         echo "file system contents"
         ls
+        echo "cat kusto.yaml"
+        cat kustomization.yaml
 
         yq e ".newTag: \"${{ github.run_number }}\"" -i kustomization.yaml
 
