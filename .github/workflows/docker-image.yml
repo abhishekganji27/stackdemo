@@ -14,20 +14,20 @@ jobs:
     env:
       IMAGE_NAME: abhishekganji27/stackdemo:${{ github.run_number }}
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    # - name: Checkout code
+    #   uses: actions/checkout@v4
     
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag $IMAGE_NAME
+    # - name: Build the Docker image
+    #   run: docker build . --file Dockerfile --tag $IMAGE_NAME
   
-    - name: Log in to Docker Hub
-      uses: docker/login-action@v3
-      with:
-        username: ${{ vars.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+    # - name: Log in to Docker Hub
+    #   uses: docker/login-action@v3
+    #   with:
+    #     username: ${{ vars.DOCKER_USERNAME }}
+    #     password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Push the Docker image
-      run: docker push $IMAGE_NAME
+    # - name: Push the Docker image
+    #   run: docker push $IMAGE_NAME
       
     - name: Checkout k8s-argocd repo
       uses: actions/checkout@v4
@@ -38,12 +38,17 @@ jobs:
     - name: modify kustomization.yaml in k8s-manifests/stackdemo dir
       run: |
         cd k8s-manifests/stackdemo
-        
+        echo "file system contents"
+        ls
+
         yq e ".newTag: \"${{ github.run_number }}\"" -i kustomization.yaml
 
+        echo "cat kusto.yaml"
         cat kustomization.yaml
 
         git --version
 
         git remote -v 
+
+
         
