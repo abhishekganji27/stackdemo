@@ -11,6 +11,8 @@ jobs:
   deploy:
 
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     env:
       IMAGE_NAME: abhishekganji27/stackdemo:${{ github.run_number }}
     steps:
@@ -58,22 +60,25 @@ jobs:
         
         cd k8s-manifests/stackdemo
 
+        echo "pwd"
+        pwd  
+
         git --version
 
         git remote -v 
 
-        git config user.email
-        git config user.name 
+        # git config user.email
+        # git config user.name 
 
-        git config user.email "abhishekganji27@gmail.com"
-        git config user.name "abhishekganji27"
+        # git config user.email "abhishekganji27@gmail.com"
+        # git config user.name "abhishekganji27"
         
-        git config user.email 
-        git config user.name 
+        # git config user.email 
+        # git config user.name 
 
-        # git add .
-        # git commit -m "modified kustomization manifest"
-        # git push 
+        git add .
+        git commit -m "modified kustomization manifest"
+        git push origin main
           
     # - name: modify kustomization.yaml in k8s-manifests/stackdemo dir
     #   run: |
