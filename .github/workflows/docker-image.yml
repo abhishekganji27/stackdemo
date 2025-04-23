@@ -46,10 +46,20 @@ jobs:
         echo "cat k11n.yaml"
         cat k8s-manifests/stackdemo/kustomization.yaml
         
+    - name: get data in k11n.yaml
+      uses: mikefarah/yq@master
+      with:
+        cmd: "yq '.images' k8s-manifests/stackdemo/kustomization.yaml"
+        
+    - name: get data in k11n.yaml
+      uses: mikefarah/yq@master
+      with:
+        cmd: "yq '.images[0]' k8s-manifests/stackdemo/kustomization.yaml"
+
     - name: update image tag in k11n.yaml
       uses: mikefarah/yq@master
       with:
-        cmd: "yq -i '.images[0].newTag: \"${{ github.run_number }}\"' k8s-manifests/stackdemo/kustomization.yaml"
+        cmd: "yq -i '.images[0].newTag = \"${{ github.run_number }}\"' k8s-manifests/stackdemo/kustomization.yaml"
 
     
     # - name: git config
