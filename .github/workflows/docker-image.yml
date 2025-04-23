@@ -57,7 +57,7 @@ jobs:
     #     git config user.name 
     
     - name: git branch
-      run: git branch 
+      run: cd k8s-manifests/stackdemo && git branch 
         
     - name: cat kustomization.yaml in k8s-manifests/stackdemo dir
       shell: bash
