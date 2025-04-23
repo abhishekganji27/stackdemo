@@ -16,20 +16,20 @@ jobs:
     env:
       IMAGE_NAME: abhishekganji27/stackdemo:${{ github.run_number }}
     steps:
-    # - name: Checkout code
-    #   uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
     
-    # - name: Build the Docker image
-    #   run: docker build . --file Dockerfile --tag $IMAGE_NAME
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag $IMAGE_NAME
   
-    # - name: Log in to Docker Hub
-    #   uses: docker/login-action@v3
-    #   with:
-    #     username: ${{ vars.DOCKER_USERNAME }}
-    #     password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ vars.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
 
-    # - name: Push the Docker image
-    #   run: docker push $IMAGE_NAME
+    - name: Push the Docker image
+      run: docker push $IMAGE_NAME
       
     - name: Checkout k8s-argocd repo
       uses: actions/checkout@v4
@@ -40,36 +40,19 @@ jobs:
     
     - name: cat kustomization.yaml in k8s-manifests/stackdemo dir
       run: |
-        # cd k8s-manifests/stackdemo
-        # echo "file system contents"
-        # ls
         echo "cat k11n.yaml"
         cat k8s-manifests/stackdemo/kustomization.yaml
         
-    - name: get data in k11n.yaml
-      uses: mikefarah/yq@master
-      with:
-        cmd: "yq '.images' k8s-manifests/stackdemo/kustomization.yaml"
-        
-    - name: get data in k11n.yaml
-      uses: mikefarah/yq@master
-      with:
-        cmd: "yq '.images[0]' k8s-manifests/stackdemo/kustomization.yaml"
-
     - name: update image tag in k11n.yaml
       uses: mikefarah/yq@master
       with:
         cmd: "yq -i '.images[0].newTag = \"${{ github.run_number }}\"' k8s-manifests/stackdemo/kustomization.yaml"
-
-    
-    # - name: git config
-    #   run: |
-    #     git config user.email 
-    #     git config user.name 
-    
-    - name: git branch
-      run: cd k8s-manifests/stackdemo && git branch && ls && git status
-    
+          
+    - name: cat kustomization.yaml in k8s-manifests/stackdemo dir
+      run: |
+        echo "cat k11n.yaml"
+        cat k8s-manifests/stackdemo/kustomization.yaml
+        
     - name: Setup git config
       run: |
         git config --global user.name "GitHub Actions"
@@ -78,46 +61,11 @@ jobs:
     - name: push changes in kustomization.yaml in k8s-manifests/stackdemo dir
       run: |
         
-        cd k8s-manifests
-        ls
-        cd stackdemo
-        ls
-        # git config user.name github-actions[bot]
-        # git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+        cd k8s-manifests/stackdemo
 
         git add .
         git commit -m "modified kustomization.yaml"
         git push origin main
-
-    # - name: cat kustomization.yaml in k8s-manifests/stackdemo dir
-    #   uses: stefanzweifel/git-auto-commit-action@v5
-    #   with:
-    #     commit_message: Modified kustomization.yaml 
-    #     repository: ./k8s-manifests/stackdemo
-            
-    # - name: git config
-    #   run: |
-    #     git config user.email 
-    #     git config user.name 
-
-
-    # - name: modify kustomization.yaml in k8s-manifests/stackdemo dir
-    #   run: |
-    #     cd k8s-manifests/stackdemo
-        # echo "file system contents"
-        # ls
-        # echo "cat kusto.yaml"
-        # cat kustomization.yaml
-
-        # yq -i ".images[0].newTag: \"${{ github.run_number }}\"" kustomization.yaml
-         
-        
-        # echo "\n\ncat kusto.yaml"
-        # cat kustomization.yaml
-
-        # git --version
-
-        # git remote -v 
 
 
         
