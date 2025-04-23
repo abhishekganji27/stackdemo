@@ -57,23 +57,12 @@ jobs:
     #     git config user.name 
     
     - name: git branch
-      run: cd k8s-manifests/stackdemo && git branch 
+      run: cd k8s-manifests/stackdemo && git branch && ls && git status
         
     - name: cat kustomization.yaml in k8s-manifests/stackdemo dir
-      shell: bash
-      run: |
-      
-        cd k8s-manifests/stackdemo
-        
-        git remote -v 
-        
-        git config user.name github-actions
-        git config user.email github-actions@github.com
-        
-        git add .
-        git commit -m "modified kustomization manifest"
-        git push origin main
-        
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: Modified kustomization.yaml 
     # - name: git config
     #   run: |
     #     git config user.email 
