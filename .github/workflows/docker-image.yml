@@ -50,37 +50,36 @@ jobs:
       with:
         cmd: "yq -i '.images[0].newTag: \"${{ github.run_number }}\"' k8s-manifests/stackdemo/kustomization.yaml"
 
+    
+    - name: git config
+      run: |
+        git config user.email 
+        git config user.name 
+    
+    - name: git branch
+      run: git branch 
+        
     - name: cat kustomization.yaml in k8s-manifests/stackdemo dir
       shell: bash
       run: |
-        # cd k8s-manifests/stackdemo
-        # echo "file system contents"
-        # ls
-        echo "cat k11n.yaml"
-        cat k8s-manifests/stackdemo/kustomization.yaml
-        
+      
         cd k8s-manifests/stackdemo
-
-        echo "pwd"
-        pwd  
-
-        git --version
-
+        
         git remote -v 
-
-        # git config user.email
-        # git config user.name 
-
+        
         git config user.name github-actions
         git config user.email github-actions@github.com
         
-        # git config user.email 
-        # git config user.name 
+        # git add .
+        # git commit -m "modified kustomization manifest"
+        # git push origin main
+        
+    - name: git config
+      run: |
+        git config user.email 
+        git config user.name 
 
-        git add .
-        git commit -m "modified kustomization manifest"
-        git push origin main
-          
+
     # - name: modify kustomization.yaml in k8s-manifests/stackdemo dir
     #   run: |
     #     cd k8s-manifests/stackdemo
