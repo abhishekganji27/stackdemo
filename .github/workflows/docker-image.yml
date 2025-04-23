@@ -51,6 +51,7 @@ jobs:
         cmd: "yq -i '.images[0].newTag: \"${{ github.run_number }}\"' k8s-manifests/stackdemo/kustomization.yaml"
 
     - name: cat kustomization.yaml in k8s-manifests/stackdemo dir
+      shell: bash
       run: |
         # cd k8s-manifests/stackdemo
         # echo "file system contents"
@@ -70,8 +71,8 @@ jobs:
         # git config user.email
         # git config user.name 
 
-        git config user.email "abhishekganji27@gmail.com"
-        git config user.name "abhishekganji27"
+        git config user.name github-actions
+        git config user.email github-actions@github.com
         
         # git config user.email 
         # git config user.name 
