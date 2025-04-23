@@ -36,6 +36,7 @@ jobs:
       with:
         repository: abhishekganji27/k8s-argocd
         path: k8s-manifests
+        token: ${{ secrets.PUSH_TO_TARGET_REPO_TOKEN }}
     
     - name: cat kustomization.yaml in k8s-manifests/stackdemo dir
       run: |
@@ -58,26 +59,31 @@ jobs:
     
     - name: git branch
       run: cd k8s-manifests/stackdemo && git branch && ls && git status
-        
-    # - name: push changes in kustomization.yaml in k8s-manifests/stackdemo dir
-    #   run: |
-        
-    #     cd k8s-manifests
-    #     ls
-    #     cd stackdemo
-    #     ls
-    #     git config user.name github-actions[bot]
-    #     git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+    
+    - name: Setup git config
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "<>"
 
-    #     git add .
-    #     git commit -m "modified kustomization.yaml "
-    #     git push origin main
+    - name: push changes in kustomization.yaml in k8s-manifests/stackdemo dir
+      run: |
+        
+        cd k8s-manifests
+        ls
+        cd stackdemo
+        ls
+        # git config user.name github-actions[bot]
+        # git config user.email 41898282+github-actions[bot]@users.noreply.github.com
 
-    - name: cat kustomization.yaml in k8s-manifests/stackdemo dir
-      uses: stefanzweifel/git-auto-commit-action@v5
-      with:
-        commit_message: Modified kustomization.yaml 
-        repository: ./k8s-manifests/stackdemo
+        git add .
+        git commit -m "modified kustomization.yaml"
+        git push origin main
+
+    # - name: cat kustomization.yaml in k8s-manifests/stackdemo dir
+    #   uses: stefanzweifel/git-auto-commit-action@v5
+    #   with:
+    #     commit_message: Modified kustomization.yaml 
+    #     repository: ./k8s-manifests/stackdemo
             
     # - name: git config
     #   run: |
